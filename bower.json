@@ -1,0 +1,18 @@
+{
+  "name": "raochunjiang.github.io",
+  "homepage": "https://raochunjiang.github.io/",
+  "authors": [
+    "raochunjiang <287573755@qq.com>"
+  ],
+  "description": "饶春江的 Github 个人主页",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
