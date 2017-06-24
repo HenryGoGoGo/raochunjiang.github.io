@@ -1,29 +1,54 @@
-(function (r) {
+(function(r) {
     'use strict';
 
     var gulp = r('gulp');
+    var bom = r('gulp-bom');
     var sass = r('gulp-sass');
+    var htmlmin = r('gulp-htmlmin');
 
-    gulp.task('sass:build', function () {
-        return gulp.src('styles/scss/**/*.scss')
+    const srcDir = './src/';
+    const buildDir = './src/';
+    const releaseDir = './';
+    /**
+     * build
+     */
+
+    gulp.task('sass:build', function() {
+        return gulp.src(srcDir + 'scss/**/*.scss')
             .pipe(sass().on('error', sass.logError))
-            .pipe(gulp.dest('styles/css'));
+            .pipe(bom())
+            .pipe(gulp.dest(buildDir + 'styles/'));
     });
 
+    gulp.task('build', ['sass:build']);
 
-    // 生成
-    gulp.task('build', ['sass:build'], function () {
+    /**
+     * release
+     */
 
+    gulp.task('sass:release', function() {
+        return gulp.src(srcDir + 'scss/**/*.scss')
+            .pipe(sass().on('error', sass.logError))
+            .pipe(bom())
+            .pipe(gulp.dest(releaseDir + 'styles/'));
     });
+
+    gulp.task('html:release', function() {
+        return gulp.src(srcDir + 'index.html')
+            .pipe(htmlmin({ collapseWhitespace: true }))
+            .pipe(bom())
+            .pipe(gulp.dest(releaseDir))
+    })
+
     // 发布
-    gulp.task('release', []);
+    gulp.task('release', ['sass:release', 'html:release']);
 
     gulp.task('default', ['build']);
 
     /**
      * 实时监听
      */
-    gulp.task('sass:watch', function () {
+    gulp.task('sass:watch', function() {
         gulp.watch('./sass/**/*.scss', ['sass']);
     });
 
