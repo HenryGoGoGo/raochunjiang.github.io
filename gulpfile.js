@@ -45,12 +45,38 @@
 
     gulp.task('copy:bootstrapfonts', function() {
         return gulp.src(componentDir + 'bootstrap-sass/assets/fonts/**/*.*')
-            .pipe(gulp.dest(buildDir + 'fonts/'))
+            .pipe(gulp.dest(buildDir + 'fonts/'));
     })
     gulp.task('build:bootstrap', ['copy:bootstrapfonts'], function() {
         return gulp.src(srcDir + 'scss/bootstrap.scss')
             .pipe(sass({
                 includePaths: [componentDir + 'bootstrap-sass/assets/stylesheets/']
+            }).on('error', sass.logError))
+            .pipe(bom())
+            .pipe(gulp.dest(buildDir + 'styles/'));
+    });
+
+    gulp.task('copy:font-awesome-fonts', function() {
+        return gulp.src(componentDir + 'font-awesome/fonts/**/*.*')
+            .pipe(gulp.dest(buildDir + 'fonts/font-awesome/'));
+    });
+    gulp.task('build:font-awesome', ['copy:font-awesome-fonts'], function() {
+        return gulp.src(srcDir + 'scss/font-awesome.scss')
+            .pipe(sass({
+                includePaths: [componentDir + 'font-awesome/']
+            }).on('error', sass.logError))
+            .pipe(bom())
+            .pipe(gulp.dest(buildDir + 'styles/'));
+    });
+
+    gulp.task('copy:simple-line-icons-fonts', function() {
+        return gulp.src(componentDir + 'simple-line-icons/fonts/**/*.*')
+            .pipe(gulp.dest(buildDir + 'fonts/simple-line-icons/'));
+    });
+    gulp.task('build:simple-line-icons', ['copy:simple-line-icons-fonts'], function() {
+        return gulp.src(srcDir + 'scss/simple-line-icons.scss')
+            .pipe(sass({
+                includePaths: [componentDir + 'simple-line-icons/']
             }).on('error', sass.logError))
             .pipe(bom())
             .pipe(gulp.dest(buildDir + 'styles/'));
@@ -63,7 +89,7 @@
             .pipe(gulp.dest(buildDir + 'styles/'));
     });
 
-    gulp.task('build', ['build:bootstrap', 'build:sitecss']);
+    gulp.task('build', ['build:bootstrap', 'build:font-awesome', 'build:simple-line-icons', 'build:sitecss']);
 
     /**
      * release tasks
@@ -71,7 +97,7 @@
 
     gulp.task('release:fonts', ['build'], function() {
         return gulp.src(buildDir + 'fonts/**/**.*')
-            .pipe(gulp.dest(releaseDir));
+            .pipe(gulp.dest(releaseDir + 'fonts/'));
     })
 
     gulp.task('release:index', ['build'], function() {
