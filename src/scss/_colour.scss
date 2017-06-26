@@ -2,3 +2,17 @@
 body {
     background-color: $body-bg-color
 }
+
+header {
+    background-color: $header-bg-color;
+}
+
+.portrait .portrait-frame {
+    box-shadow: 0px 0px 15px #fff inset;
+    background-color: #8B7356;
+}
+
+.portrait .portrait-frame::before {
+    background-color: $header-bg-color;
+    box-shadow: 0px 0px 15px #fff;
+}
