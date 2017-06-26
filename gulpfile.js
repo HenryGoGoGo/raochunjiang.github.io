@@ -1,25 +1,5 @@
 (function(r) {
     'use strict';
-    // 常用插件
-    // var gulp = require('gulp');
-    // var del = require('del');
-    // var rev = require('gulp-rev');
-    // var nano = require('gulp-cssnano');
-    // var uglify = require('gulp-uglify')
-    // var useref = require('gulp-useref');
-    // var imagemin = require('gulp-imagemin');
-    // var revCollector = require('gulp-rev-collector');
-    // var browserSync = require('browser-sync').create();
-    // var gulpSequence = require('gulp-sequence');
-    // var uncss = require('gulp-uncss');
-    // var htmlmin = require('gulp-htmlmin');
-    // var base64 = require('gulp-base64');
-    // var changed = require('gulp-changed');
-    // var postcss = require("gulp-postcss");
-    // var sprites = require('postcss-sprites').default;
-    // var autoprefixer = require('autoprefixer');
-    // var cssgrace = require('cssgrace');
-
     var
         gulp = r('gulp'),
         bom = r('gulp-bom'), //https://www.npmjs.com/package/gulp-bom; // 输出文件 utf-8 修复
@@ -30,7 +10,12 @@
         rename = r('gulp-rename'), //https://www.npmjs.com/package/gulp-rename; // 输出文件重命名
         reversion = r('gulp-rev'), //https://www.npmjs.com/package/gulp-rev; // 输出文件名追加 hash 版本
         usemin = r('gulp-usemin'), //https://www.npmjs.com/package/gulp-usemin;// html 资源引用优化
-        del = r('del');
+        through = r('through2'),
+        path = r('path'),
+        fs = r('fs'),
+        del = r('del'),
+        sha = r('sha'),
+        q = r('q');
     /**
      * path configuration
      */
@@ -40,11 +25,39 @@
     const componentDir = './bower_components/';
 
     /**
+     * 以源目录中的文件为基准验证目标目录中的文件是否已经发生变更。
+     * @param {*源目录中的文件信息} file 
+     * @param {*文件源目录} srcDir 
+     * @param {*文件目标目录} targetDir 
+     */
+    function isFileDifferent(file, srcDir, targetDir) {
+        var name = file.path;
+        var targetName = name.replace(path.resolve(srcDir), path.resolve(targetDir));
+        if (!fs.existsSync(targetName)) {
+            return true;
+        } else {
+            var actural = sha.getSync(name);
+            var expected = sha.getSync(targetName);
+
+            if (actural !== expected) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * build tasks
      */
 
     gulp.task('copy:bootstrapfonts', function() {
         return gulp.src(componentDir + 'bootstrap-sass/assets/fonts/**/*.*')
+            .pipe(through.obj(function(file, enc, cb) {
+                if (isFileDifferent(file, componentDir + 'bootstrap-sass/assets/fonts/bootstrap', buildDir + 'fonts/bootstrap')) {
+                    this.push(file);
+                }
+                cb();
+            }))
             .pipe(gulp.dest(buildDir + 'fonts/'));
     })
     gulp.task('build:bootstrap', ['copy:bootstrapfonts'], function() {
@@ -58,6 +71,12 @@
 
     gulp.task('copy:font-awesome-fonts', function() {
         return gulp.src(componentDir + 'font-awesome/fonts/**/*.*')
+            .pipe(through.obj(function(file, enc, cb) {
+                if (isFileDifferent(file, componentDir + 'font-awesome/fonts', buildDir + 'fonts/font-awesome')) {
+                    this.push(file);
+                }
+                cb();
+            }))
             .pipe(gulp.dest(buildDir + 'fonts/font-awesome/'));
     });
     gulp.task('build:font-awesome', ['copy:font-awesome-fonts'], function() {
@@ -71,6 +90,12 @@
 
     gulp.task('copy:simple-line-icons-fonts', function() {
         return gulp.src(componentDir + 'simple-line-icons/fonts/**/*.*')
+            .pipe(through.obj(function(file, enc, cb) {
+                if (isFileDifferent(file, componentDir + 'simple-line-icons/fonts', buildDir + 'fonts/simple-line-icons')) {
+                    this.push(file);
+                }
+                cb();
+            }))
             .pipe(gulp.dest(buildDir + 'fonts/simple-line-icons/'));
     });
     gulp.task('build:simple-line-icons', ['copy:simple-line-icons-fonts'], function() {
@@ -97,6 +122,12 @@
 
     gulp.task('release:fonts', ['build'], function() {
         return gulp.src(buildDir + 'fonts/**/**.*')
+            .pipe(through.obj(function(file, enc, cb) {
+                if (isFileDifferent(file, buildDir + 'fonts', releaseDir + 'fonts')) {
+                    this.push(file);
+                }
+                cb();
+            }))
             .pipe(gulp.dest(releaseDir + 'fonts/'));
     })
 

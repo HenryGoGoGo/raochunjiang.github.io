@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "del": "^3.0.0",
+    "fs": "^0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-bom": "^1.0.0",
     "gulp-concat": "^2.6.1",
@@ -9,6 +10,10 @@
     "gulp-rename": "^1.2.2",
     "gulp-rev": "^7.1.2",
     "gulp-sass": "^3.1.0",
-    "gulp-usemin": "^0.3.28"
+    "gulp-usemin": "^0.3.28",
+    "path": "^0.12.7",
+    "q": "^1.5.0",
+    "sha": "^2.0.1",
+    "through2": "^2.0.3"
   }
 }
