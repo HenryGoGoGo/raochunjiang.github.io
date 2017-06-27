@@ -32,16 +32,28 @@ h6 {
   display: inline-block;
   padding: 10px;
   margin: auto;
+  border-radius: 50%; }
+
+.portrait .portrait-frame .portrait-glass {
   border-radius: 50%;
+  height: 200px;
+  width: 200px;
   position: relative;
   overflow: hidden; }
-
-.portrait .portrait-frame::before {
-  content: " ";
-  display: block;
-  border-radius: 50%;
-  height: 180px;
-  width: 180px; }
+  .portrait .portrait-frame .portrait-glass > img, .portrait .portrait-frame .portrait-glass::after {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%; }
+  .portrait .portrait-frame .portrait-glass > img {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); }
+  .portrait .portrait-frame .portrait-glass::after {
+    content: " ";
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 50%; }
 
 @media (min-width: 992px) {
   .portrait,
@@ -57,9 +69,12 @@ header {
   background-color: #5E452B; }
 
 .portrait .portrait-frame {
-  box-shadow: 0px -1px 5px #fff, 0px 1px 10px #000, 0px 3px 10px #fff inset;
+  box-shadow: 0px 1px 15px #000, 0px 1px 10px #fff inset;
   background-color: #926c43; }
 
-.portrait .portrait-frame::before {
+.portrait .portrait-frame .portrait-glass {
   background-color: #5E452B;
-  box-shadow: 0px 3px 10px #fff, 0px -1px 5px #fff inset, 0px 3px 10px #000 inset; }
+  box-shadow: 0px -1px 10px #fff; }
+  .portrait .portrait-frame .portrait-glass::after {
+    background: transparent;
+    box-shadow: 0px 1px 10px #000, 0px -1px 15px #000 inset; }

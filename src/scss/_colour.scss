@@ -7,12 +7,17 @@ header {
     background-color: $header-bg-color;
 }
 
-.portrait .portrait-frame {
-    box-shadow: 0px -1px 5px #fff, 0px 1px 10px #000, 0px 3px 10px #fff inset;
-    background-color: lighten($header-bg-color, 15%);
-}
-
-.portrait .portrait-frame::before {
-    background-color: $header-bg-color;
-    box-shadow: 0px 3px 10px #fff, 0px -1px 5px #fff inset, 0px 3px 10px #000 inset;
+.portrait {
+    .portrait-frame {
+        box-shadow: 0px 1px 15px #000, 0px 1px 10px #fff inset;
+        background-color: lighten($header-bg-color, 15%);
+    }
+    .portrait-frame .portrait-glass {
+        background-color: $header-bg-color;
+        box-shadow: 0px -1px 10px #fff;
+        &::after {
+            background: transparent;
+            box-shadow: 0px 1px 10px #000, 0px -1px 15px #000 inset;
+        }
+    }
 }

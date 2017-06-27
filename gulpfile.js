@@ -6,6 +6,7 @@
         sass = r('gulp-sass'), //https://www.npmjs.com/package/gulp-sass; // scss/sass 编译支持
         cssmin = r('gulp-cssmin'), //https://www.npmjs.com/package/gulp-cssmin; // css 压缩
         htmlmin = r('gulp-htmlmin'), //https://www.npmjs.com/package/gulp-htmlmin; // html 压缩
+        imagemin = require('gulp-imagemin'), //https://www.npmjs.com/package/gulp-imagemin // 图片压缩
         concat = r('gulp-concat'), //https://www.npmjs.com/package/gulp-htmlmin; // 合并 js/css 
         rename = r('gulp-rename'), //https://www.npmjs.com/package/gulp-rename; // 输出文件重命名
         reversion = r('gulp-rev'), //https://www.npmjs.com/package/gulp-rev; // 输出文件名追加 hash 版本
@@ -121,7 +122,7 @@
      */
 
     gulp.task('release:fonts', ['build'], function() {
-        return gulp.src(buildDir + 'fonts/**/**.*')
+        return gulp.src(buildDir + 'fonts/**/*.*')
             .pipe(through.obj(function(file, enc, cb) {
                 if (isFileDifferent(file, buildDir + 'fonts', releaseDir + 'fonts')) {
                     this.push(file);
@@ -129,7 +130,19 @@
                 cb();
             }))
             .pipe(gulp.dest(releaseDir + 'fonts/'));
-    })
+    });
+
+    gulp.task('release:images', ['build'], function() {
+        return gulp.src(buildDir + 'images/**/*.*')
+            .pipe(imagemin())
+            .pipe(through.obj(function(file, enc, cb) {
+                if (isFileDifferent(file, buildDir + 'images', releaseDir + 'images')) {
+                    this.push(file);
+                }
+                cb();
+            }))
+            .pipe(gulp.dest(releaseDir + 'images'));
+    });
 
     gulp.task('release:index', ['build'], function() {
         return gulp.src(buildDir + 'index.html')
@@ -141,7 +154,7 @@
             .pipe(gulp.dest(releaseDir))
     })
 
-    gulp.task('release', ['release:index', 'release:fonts']);
+    gulp.task('release', ['release:index', 'release:fonts', 'release:images']);
 
     gulp.task('default', ['build']);
 
