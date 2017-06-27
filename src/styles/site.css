@@ -47,6 +47,8 @@ h6 {
   .portrait .portrait-frame .portrait-glass > img {
     left: 50%;
     top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%); }
   .portrait .portrait-frame .portrait-glass::after {
     content: " ";
@@ -55,7 +57,7 @@ h6 {
     display: block;
     border-radius: 50%; }
 
-@media (min-width: 992px) {
+@media (min-width: 480px) {
   .portrait,
   .vcard {
     width: 50%; }

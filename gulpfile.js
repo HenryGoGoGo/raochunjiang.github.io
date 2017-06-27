@@ -11,6 +11,7 @@
         rename = r('gulp-rename'), //https://www.npmjs.com/package/gulp-rename; // 输出文件重命名
         reversion = r('gulp-rev'), //https://www.npmjs.com/package/gulp-rev; // 输出文件名追加 hash 版本
         usemin = r('gulp-usemin'), //https://www.npmjs.com/package/gulp-usemin;// html 资源引用优化
+        autoprefixer = r('gulp-autoprefixer'), // https://www.npmjs.com/package/gulp-autoprefixer
         through = r('through2'),
         path = r('path'),
         fs = r('fs'),
@@ -111,6 +112,9 @@
     gulp.task('build:sitecss', function() {
         return gulp.src(srcDir + 'scss/site.scss')
             .pipe(sass().on('error', sass.logError))
+            .pipe(autoprefixer({
+                cascade: false
+            }))
             .pipe(bom())
             .pipe(gulp.dest(buildDir + 'styles/'));
     });

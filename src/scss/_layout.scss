@@ -44,12 +44,7 @@
     }
 }
 
-@media (min-width: $screen-sm-min) {
-    .portrait,
-    .vcard {}
-}
-
-@media (min-width: $screen-md-min) {
+@media (min-width: $screen-xs-min) {
     .portrait,
     .vcard {
         width: 50%;
@@ -59,7 +54,15 @@
     }
 }
 
-@media (min-width: $screen-lg-min) {
-    .portrait,
-    .vcard {}
-}
+// @media (min-width: $screen-sm-min) {
+//     .portrait,
+//     .vcard {}
+// }
+// @media (min-width: $screen-md-min) {
+//     .portrait,
+//     .vcard {}
+// }
+// @media (min-width: $screen-lg-min) {
+//     .portrait,
+//     .vcard {}
+// }
