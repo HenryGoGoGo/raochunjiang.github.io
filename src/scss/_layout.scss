@@ -19,8 +19,8 @@
     }
     .portrait-frame .portrait-glass {
         border-radius: 50%;
-        height: 200px;
-        width: 200px;
+        height: 120px;
+        width: 120px;
         position: relative;
         overflow: hidden;
         >img,
@@ -44,13 +44,44 @@
     }
 }
 
+.vcard {
+    .name {
+        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+        font-size: 36px;
+        letter-spacing: 18px;
+        padding: 15px;
+    }
+    .description {
+        font-size: 16px;
+        padding: 15px;
+    }
+    .communities {
+        list-style: none;
+        font-size: 36px;
+        display: block;
+        padding: 0;
+        li {
+            display: inline;
+        }
+        &::after {
+            clear: both;
+        }
+        li>a {
+            padding: 10px 15px;
+        }
+    }
+}
+
 @media (min-width: $screen-xs-min) {
     .portrait,
     .vcard {
         width: 50%;
-    }
-    .vcard {
         text-align: left;
+    }
+    .portrait .portrait-frame .portrait-glass {
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
     }
 }
 

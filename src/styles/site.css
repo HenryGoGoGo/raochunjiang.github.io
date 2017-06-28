@@ -1,4 +1,5 @@
-﻿/**
+﻿@charset "UTF-8";
+/**
 *  Device widths
 */
 html,
@@ -36,8 +37,8 @@ h6 {
 
 .portrait .portrait-frame .portrait-glass {
   border-radius: 50%;
-  height: 200px;
-  width: 200px;
+  height: 120px;
+  width: 120px;
   position: relative;
   overflow: hidden; }
   .portrait .portrait-frame .portrait-glass > img, .portrait .portrait-frame .portrait-glass::after {
@@ -57,26 +58,64 @@ h6 {
     display: block;
     border-radius: 50%; }
 
+.vcard .name {
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+  font-size: 36px;
+  letter-spacing: 18px;
+  padding: 15px; }
+
+.vcard .description {
+  font-size: 16px;
+  padding: 15px; }
+
+.vcard .communities {
+  list-style: none;
+  font-size: 36px;
+  display: block;
+  padding: 0; }
+  .vcard .communities li {
+    display: inline; }
+  .vcard .communities::after {
+    clear: both; }
+  .vcard .communities li > a {
+    padding: 10px 15px; }
+
 @media (min-width: 480px) {
   .portrait,
   .vcard {
-    width: 50%; }
-  .vcard {
-    text-align: left; } }
+    width: 50%;
+    text-align: left; }
+  .portrait .portrait-frame .portrait-glass {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px; } }
 
 body {
   background-color: #fff; }
 
 header {
-  background-color: #5E452B; }
+  background-color: #003847; }
 
 .portrait .portrait-frame {
   box-shadow: 0px 1px 15px #000, 0px 1px 10px #fff inset;
-  background-color: #926c43; }
+  background-color: #007494; }
 
 .portrait .portrait-frame .portrait-glass {
-  background-color: #5E452B;
+  background-color: #003847;
   box-shadow: 0px -1px 10px #fff; }
   .portrait .portrait-frame .portrait-glass::after {
     background: transparent;
     box-shadow: 0px 1px 10px #000, 0px -1px 15px #000 inset; }
+
+.vcard {
+  color: #0088ad; }
+  .vcard .name {
+    text-shadow: 0 0 10px #000; }
+  .vcard .description {
+    text-shadow: 0 0 10px #000; }
+  .vcard .communities li > a {
+    color: #14cdff; }
+  .vcard .communities li > a:hover {
+    color: #47d8ff; }
+  .vcard .communities li > a:active {
+    color: #00b1e0; }

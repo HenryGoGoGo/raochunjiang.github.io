@@ -177,8 +177,13 @@
     /**
      * 实时监听
      */
-    // gulp.task('sass:watch', function() {
-    //     gulp.watch('./sass/**/*.scss', ['sass']);
-    // });
+    gulp.task('watch', function() {
+        var watcher = gulp.watch('src/**/*.scss', ['release']);
+        watcher.on('change', function(event) {
+            console.log('Event type: ' + event.type); // added, changed, or deleted
+            console.log('Event path: ' + event.path); // The path of the modified file
+        });
+    });
 
-})(require)
+
+})(require);
