@@ -1,6 +1,10 @@
 // 布局
 .header {
-    padding: 50px 0 50px 0;
+    padding: 30px 0 30px 0;
+}
+
+.header .container {
+    height: auto;
 }
 
 .portrait,
@@ -8,6 +12,7 @@
     float: left;
     width: 100%;
     text-align: center;
+    margin: 10px auto;
 }
 
 .portrait {
@@ -17,29 +22,31 @@
         margin: auto;
         border-radius: 50%;
     }
-    .portrait-frame .portrait-glass {
-        border-radius: 50%;
-        height: 120px;
-        width: 120px;
-        position: relative;
-        overflow: hidden;
-        >img,
-        &::after {
-            position: absolute;
-            min-height: 100%;
-            min-width: 100%;
-        }
-        >img {
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-        &::after {
-            content: " ";
-            top: 0;
-            left: 0;
-            display: block;
+    .portrait-frame {
+        .portrait-glass {
             border-radius: 50%;
+            height: 120px;
+            width: 120px;
+            position: relative;
+            overflow: hidden;
+            >img,
+            &::after {
+                position: absolute;
+                min-height: 100%;
+                min-width: 100%;
+            }
+            >img {
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+            &::after {
+                content: " ";
+                top: 0;
+                left: 0;
+                display: block;
+                border-radius: 50%;
+            }
         }
     }
 }
@@ -49,17 +56,19 @@
         font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
         font-size: 36px;
         letter-spacing: 18px;
-        padding: 15px;
+        padding: 10px 0 10px 18px;
     }
     .description {
         font-size: 16px;
-        padding: 15px;
+        padding: 10px 0;
     }
     .communities {
+        line-height: 2;
         list-style: none;
         font-size: 36px;
         display: block;
-        padding: 0;
+        padding: 0 0;
+        margin-bottom: 0;
         li {
             display: inline;
         }
@@ -67,33 +76,69 @@
             clear: both;
         }
         li>a {
+            border-radius: 50%;
             padding: 10px 15px;
         }
     }
 }
 
 @media (min-width: $screen-xs-min) {
+    .header {
+        padding: 50px 0 50px 0;
+    }
+    .header .container {
+        height: 230px;
+        overflow: visible;
+    }
     .portrait,
     .vcard {
         width: 50%;
-        text-align: left;
+        margin: auto;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
     }
-    .portrait .portrait-frame .portrait-glass {
-        border-radius: 50%;
-        height: 200px;
-        width: 200px;
+    .vcard {
+        text-align: left;
+        .name,
+        .description {
+            padding-left: 15px;
+        }
+    }
+    .portrait {
+        .portrait-frame {
+            margin: 10px auto;
+            .portrait-glass {
+                height: 180px;
+                width: 180px;
+            }
+        }
     }
 }
 
-// @media (min-width: $screen-sm-min) {
-//     .portrait,
-//     .vcard {}
-// }
-// @media (min-width: $screen-md-min) {
-//     .portrait,
-//     .vcard {}
-// }
-// @media (min-width: $screen-lg-min) {
-//     .portrait,
-//     .vcard {}
-// }
+@media (min-width: $screen-sm-min) {
+    .portrait {
+        width: 40%;
+    }
+    .vcard {
+        width: 60%;
+    }
+}
+
+@media (min-width: $screen-md-min) {
+    .portrait {
+        width: 40%;
+    }
+    .vcard {
+        width: 60%;
+    }
+}
+
+@media (min-width: $screen-lg-min) {
+    .portrait {
+        width: 30%;
+    }
+    .vcard {
+        width: 70%;
+    }
+}

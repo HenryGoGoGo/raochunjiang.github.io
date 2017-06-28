@@ -21,13 +21,17 @@ h6 {
   outline: 0 !important; }
 
 .header {
-  padding: 50px 0 50px 0; }
+  padding: 30px 0 30px 0; }
+
+.header .container {
+  height: auto; }
 
 .portrait,
 .vcard {
   float: left;
   width: 100%;
-  text-align: center; }
+  text-align: center;
+  margin: 10px auto; }
 
 .portrait .portrait-frame {
   display: inline-block;
@@ -62,33 +66,70 @@ h6 {
   font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
   font-size: 36px;
   letter-spacing: 18px;
-  padding: 15px; }
+  padding: 10px 0 10px 18px; }
 
 .vcard .description {
   font-size: 16px;
-  padding: 15px; }
+  padding: 10px 0; }
 
 .vcard .communities {
+  line-height: 2;
   list-style: none;
   font-size: 36px;
   display: block;
-  padding: 0; }
+  padding: 0 0;
+  margin-bottom: 0; }
   .vcard .communities li {
     display: inline; }
   .vcard .communities::after {
     clear: both; }
   .vcard .communities li > a {
+    border-radius: 50%;
     padding: 10px 15px; }
 
 @media (min-width: 480px) {
+  .header {
+    padding: 50px 0 50px 0; }
+  .header .container {
+    height: 230px;
+    overflow: visible; }
   .portrait,
   .vcard {
     width: 50%;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
+  .vcard {
     text-align: left; }
-  .portrait .portrait-frame .portrait-glass {
-    border-radius: 50%;
-    height: 200px;
-    width: 200px; } }
+    .vcard .name,
+    .vcard .description {
+      padding-left: 15px; }
+  .portrait .portrait-frame {
+    margin: 10px auto; }
+    .portrait .portrait-frame .portrait-glass {
+      height: 180px;
+      width: 180px; } }
+
+@media (min-width: 768px) {
+  .portrait {
+    width: 40%; }
+  .vcard {
+    width: 60%; } }
+
+@media (min-width: 992px) {
+  .portrait {
+    width: 40%; }
+  .vcard {
+    width: 60%; } }
+
+@media (min-width: 1200px) {
+  .portrait {
+    width: 30%; }
+  .vcard {
+    width: 70%; } }
 
 body {
   background-color: #fff; }
@@ -116,6 +157,20 @@ header {
   .vcard .communities li > a {
     color: #14cdff; }
   .vcard .communities li > a:hover {
-    color: #47d8ff; }
+    color: #00b1e0;
+    -webkit-animation: sploosh3 1s;
+    animation: sploosh3 1s; }
   .vcard .communities li > a:active {
-    color: #00b1e0; }
+    color: #0088ad; }
+
+@-webkit-keyframes sploosh3 {
+  0% {
+    text-shadow: 0 0 0px #14cdff; }
+  100% {
+    text-shadow: 0 0 100px rgba(20, 205, 255, 0); } }
+
+@keyframes sploosh3 {
+  0% {
+    text-shadow: 0 0 0px #14cdff; }
+  100% {
+    text-shadow: 0 0 100px rgba(20, 205, 255, 0); } }
